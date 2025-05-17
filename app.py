@@ -157,9 +157,14 @@ div[data-testid="stMarkdownContainer"] strong { /* For **Fórmula Mágica:** etc
     margin-top: 1rem !important;
     margin-bottom: 0.5rem !important;
 }
-div[data-testid="stMarkdownContainer"] p {
+div[data-testid="stMarkdownContainer"] button > p {
     font-family: 'Inter', sans-serif !important;
     color: #5a4b3a !important;
+    margin-bottom: 0.8rem !important;
+}
+div[data-testid="stMarkdownContainer"] p {
+    font-family: 'Inter', sans-serif !important;
+    color: #e0e0e0 !important;
     margin-bottom: 0.8rem !important;
 }
 div[data-testid="stMarkdownContainer"] ul,
