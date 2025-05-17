@@ -167,17 +167,16 @@ if GOOGLE_API_KEY:
             # Use st.status to show progress for the entire agent chain
             with st.status("Criando sua receita...", expanded=True) as status:
                 try:
-                    data_de_hoje = date.today().strftime("%Y-%m-%d") # Get current date
-
+                    
                     # --- Call Agent 1 ---
                     status.update(label="Passo 1: Buscando receitas compatíveis...", state="running")
                     lancamentos_buscados = agente_buscador(topico, data_de_hoje)
                     status.update(label="Passo 1 concluído.", state="complete")
 
                     # --- Display Result 1 ---
-                    st.subheader("📝 Resultado do Agente 1 (Assistente)")
-                    st.markdown(format_markdown_output(lancamentos_buscados))
-                    st.markdown("---") # Horizontal rule
+                  #  st.subheader("📝 Resultado do Agente 1 (Assistente)")
+                  #  st.markdown(format_markdown_output(lancamentos_buscados))
+                  #  st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 2 ---
                     status.update(label="Passo 2: Planejando a receita principal...", state="running")
@@ -185,9 +184,9 @@ if GOOGLE_API_KEY:
                     status.update(label="Passo 2 concluído.", state="complete")
 
                     # --- Display Result 2 ---
-                    st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
-                    st.markdown(format_markdown_output(plano_de_post))
-                    st.markdown("---") # Horizontal rule
+                   # st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
+                   # st.markdown(format_markdown_output(plano_de_post))
+                   # st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 3 ---
                     status.update(label="Passo 3: Escrevendo o tutorial da receita...", state="running")
