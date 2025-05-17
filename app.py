@@ -85,7 +85,7 @@ if GOOGLE_API_KEY:
             """
         )
         entrada_do_agente_buscador = f"Tópico: {topico} \n"
-        st.info("Chamando Agente 1 (Assistente)...") # Indicate progress
+        #st.info("Chamando Agente 1 (Assistente)...") # Indicate progress
         result = call_agent(buscador, entrada_do_agente_buscador)
         return result
 
@@ -115,7 +115,7 @@ if GOOGLE_API_KEY:
         )
 
         entrada_do_agente_planejador = f"Tópico:{topico}\nLançamentos buscados: {lancamentos_buscados}"
-        st.info("Chamando Agente 2 (Cozinheiro)...") # Indicate progress
+        #st.info("Chamando Agente 2 (Cozinheiro)...") # Indicate progress
         result = call_agent(cozinheiro, entrada_do_agente_planejador)
         return result
 
@@ -174,9 +174,9 @@ if GOOGLE_API_KEY:
                     status.update(label="Passo 1 concluído.", state="complete")
 
                     # --- Display Result 1 ---
-                    st.subheader("📝 Resultado do Agente 1 (Assistente)")
-                    st.markdown(format_markdown_output(searched_recipes))
-                    st.markdown("---") # Horizontal rule
+                    #st.subheader("📝 Resultado do Agente 1 (Assistente)")
+                    #st.markdown(format_markdown_output(searched_recipes))
+                    #st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 2 ---
                     status.update(label="Passo 2: Planejando a receita principal...", state="running")
@@ -184,9 +184,9 @@ if GOOGLE_API_KEY:
                     status.update(label="Passo 2 concluído.", state="complete")
 
                     # --- Display Result 2 ---
-                    st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
-                    st.markdown(format_markdown_output(recipe_plan))
-                    st.markdown("---") # Horizontal rule
+                    #st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
+                    #st.markdown(format_markdown_output(recipe_plan))
+                    #st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 3 ---
                     status.update(label="Passo 3: Escrevendo o tutorial da receita...", state="running")
