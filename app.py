@@ -87,7 +87,7 @@ div[data-testid="stButton"] > button {
     font-family: 'Cinzel Decorative', cursive !important;
     font-size: 1.2rem !important; /* Um pouco maior */
     font-weight: 700 !important;
-    color: #5a4b3a !important; /* Cor de texto de pergaminho (Marrom escuro) */
+    color: #8B4513 !important; /* Cor de texto de pergaminho (Marrom escuro) */
     background: linear-gradient(to bottom, #f0e68c, #e9d98a) !important; /* Gradiente sutil de pergaminho */
     border: none !important;
     padding: 14px 32px !important;
@@ -99,7 +99,7 @@ div[data-testid="stButton"] > button {
         inset 0 0 10px rgba(0,0,0,0.2), /* Sombra interna sutil */
         0 4px 0 0 #8b4513, /* Sombra marrom inferior (simula borda) */
         0 6px 8px rgba(0,0,0,0.4) !important; /* Sombra externa */
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.3) !important; /* Sombra clara no texto */
+    text-shadow:  1px 1px 0px #422d09 !important; /* Sombra clara no texto */
     cursor: pointer !important;
     width: auto !important; /* Para o botão não ocupar a largura toda por padrão */
 }
@@ -156,11 +156,6 @@ div[data-testid="stMarkdownContainer"] strong { /* For **Fórmula Mágica:** etc
     text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
     margin-top: 1rem !important;
     margin-bottom: 0.5rem !important;
-}
-div[data-testid="stMarkdownContainer"] button > p {
-    font-family: 'Inter', sans-serif !important;
-    color: #5a4b3a !important;
-    margin-bottom: 0.8rem !important;
 }
 div[data-testid="stMarkdownContainer"] p {
     font-family: 'Inter', sans-serif !important;
