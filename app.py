@@ -204,16 +204,49 @@ if GOOGLE_API_KEY:
                     st.markdown(format_markdown_output(recipe_post))
                     st.markdown("---") # Horizontal rule
 
-                    status.update(label="Receita gerada com sucesso!", state="complete")
-
-                    # --- Download Button ---
-                    st.download_button(
-                        label="Download Receita (TXT)",
-                        data=recipe_post, # Provide the raw text content
-                        file_name=f"receita_{ingredients.replace(' ', '_')}.txt", # Create a filename based on ingredients
-                        mime="text/plain" # Specify the MIME type for a text file
-                    )
+                    status.update(label="Receita gerada com sucesso!", state="complete") 
 
                 except Exception as e:
                     st.error(f"Ocorreu um erro durante a geração da receita: {e}")
                     status.update(label="Erro na geração da receita.", state="error")
+
+                # This button will appear after the 'with st.status' block finishes
+            if recipe_post: # Only show button if a recipe was generated
+                # Attempt to extract a filename from the first line of the recipe output
+                download_filename = "receita.txt" # Default filename
+                try:
+                    first_line = recipe_post.strip().split('\n')[0]
+                    potential_title = first_line.lstrip('# ').strip() # Remove potential markdown header and strip whitespace
+
+                    if potential_title:
+                        # Sanitize the title for use as a filename
+                        # Keep alphanumeric, underscore, hyphen. Replace others with underscore.
+                        sanitized_title = re.sub(r'[^\w\-]+', '_', potential_title)
+                        # Avoid starting/ending with underscore if possible, or multiple underscores
+                        sanitized_title = re.sub(r'_+', '_', sanitized_title).strip('_')
+                        # Limit length to avoid issues with file systems
+                        max_len = 50
+                        if len(sanitized_title) > max_len:
+                            sanitized_title = sanitized_title[:max_len] # Truncate
+                            # Option: add '...' sanitized = sanitized.rstrip('_') + '...'
+                        if sanitized_title: # Ensure it's not empty after sanitization
+                             download_filename = f"{sanitized_title}.txt"
+                        # Else: sanitized_title was empty, use default filename
+                    # --- Download Button ---
+                    st.download_button(
+                        label="Baixar Receita",
+                        data=recipe_post, # Provide the raw text content
+                        file_name=f"receita_{ingredients.replace(' ', '_')}.txt", # Create a filename based on ingredients
+                        mime="text/plain" # Specify the MIME type for a text file
+                    )
+                except Exception as e:
+                    # If any error during title extraction, just use the default filename
+                    # st.warning(f"Could not extract a filename from the recipe. Using default name '{download_filename}'. Error: {e}") # Optional: uncomment for debugging title extraction
+                    pass # Use default filename
+
+                st.download_button(
+                    label="Baixar Receita",
+                    data=recipe_post, # Provide the raw text content
+                    file_name=download_filename,
+                    mime="text/plain" # Specify the MIME type for a text file
+                )
