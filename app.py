@@ -6,6 +6,7 @@ from google.adk.sessions import InMemorySessionService
 from google.adk.tools import google_search
 from google.genai import types
 from google import genai
+import re
 import textwrap
 import warnings
 # Use st.secrets for API key in Streamlit Cloud
