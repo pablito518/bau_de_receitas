@@ -17,7 +17,7 @@ def load_css(file_name="style.css"):
         st.error(f"Erro ao carregar CSS: {e}")
 
 # Carrega o CSS
-load_css()
+css_completo = load_css()
 # --- Streamlit App Layout ---
 
 st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered") # centered or wide
