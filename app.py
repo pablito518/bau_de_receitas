@@ -145,10 +145,10 @@ if GOOGLE_API_KEY:
         return result
 
     # --- Streamlit App Layout ---
-    st.title("🍳 Gerador de Receitas com Sobras")
+    st.title("🍳 Baú de receitas")
 
     st.write("""
-    Bem-vindo ao Gerador de Receitas com Sobras!
+    Bem-vindo ao Baú de receitas!
     Informe os ingredientes que você tem e nossa equipe de agentes culinários criará uma receita exclusiva para você.
     """)
 
