@@ -1,0 +1,132 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Inter:wght@400;600&display=swap');
+
+/* Apply styles to the main body and container */
+body {
+    font-family: 'Inter', sans-serif; /* Inter for general text */
+    background-color: #120a2b; /* Dark purple background */
+    color: #e0e0e0; /* Light gray text */
+    line-height: 1.8; /* Espaçamento de linha melhorado */
+    /* Add a background texture/image if you have one available and can host it */
+    /* background-image: url('your-background-image-url.jpg'); */
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* Target Streamlit's main container to ensure background covers the app area */
+.stApp {
+    background-color: #120a2b; /* Same dark purple background */
+    /* Use a relative path for background images if the image is in the same repo */
+    /* background-image: url('/path/to/your/image.jpg'); */
+    /* Or use a public URL */
+    /* background-image: url('https://i.imgur.com/xxxxx.jpg'); */
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+/* Apply Cinzel Decorative to titles/headers - targeting Streamlit generated classes */
+/* These selectors might need updates with Streamlit versions */
+h1, h2, h3, h4, h5, h6, .css-10trblm.e16z1upr0, [data-testid="stMarkdown"] h1, [data-testid="stMarkdown"] h2, [data-testid="stMarkdown"] h3, [data-testid="stMarkdown"] h4, [data-testid="stMarkdown"] h5, [data-testid="stMarkdown"] h6 {
+    font-family: 'Cinzel Decorative', cursive;
+    color: #f0d9b5; /* Light gold/parchment color for headings */
+    text-shadow: 2px 2px 4px #000000; /* Subtle text shadow */
+}
+
+/* Style the main title specifically */
+h1 {
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+
+/* Attempt to style native Streamlit elements */
+
+/* Text Input */
+.stTextInput > label {
+    font-family: 'Cinzel Decorative', cursive; /* Style label */
+    color: #f0d9b5; /* Label color */
+    font-weight: bold;
+}
+.stTextInput > div > input {
+    background-color: #2a1a4f !important; /* Slightly lighter purple */
+    color: #e0e0e0 !important; /* Input text color */
+    border: 1px solid #f0d9b5 !important; /* Parchment colored border */
+    border-radius: 5px !important;
+    padding: 10px !important;
+    font-family: 'Inter', sans-serif; /* Use Inter for input text */
+}
+
+/* Button */
+.stButton > button {
+    font-family: 'Cinzel Decorative', cursive !important;
+    background-color: #f0d9b5 !important; /* Parchment button color */
+    color: #120a2b !important; /* Dark text on button */
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 10px 20px !important;
+    margin-top: 10px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+    text-transform: uppercase !important;
+    font-weight: bold !important;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5); /* Add shadow */
+}
+.stButton > button:hover {
+    background-color: #e0c9a5 !important; /* Darker parchment on hover */
+}
+
+/* Status/Spinner */
+.stStatus {
+    border-left: 5px solid #f0d9b5 !important; /* Parchment color border */
+    padding: 15px !important; /* Increased padding */
+    background-color: #2a1a4f !important; /* Slightly lighter purple background */
+    border-radius: 5px !important;
+    margin-top: 20px !important; /* Increased margin */
+    margin-bottom: 20px !important;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5); /* Add shadow */
+}
+.stStatus [data-testid="stStatusLabel"] { /* Target the label inside status */
+     font-family: 'Cinzel Decorative', cursive !important;
+     color: #f0d9b5 !important; /* Parchment color for status label */
+     font-weight: bold;
+}
+/* Text inside the status container uses the default body styles */
+
+
+/* Style markdown blockquotes (used by format_markdown_output) */
+blockquote {
+    background-color: #f0d9b51a; /* Semi-transparent parchment tint */
+    border-left: 4px solid #f0d9b5; /* Parchment colored border */
+    margin: 1.5em 10px; /* Adjust margin */
+    padding: 0.5em 10px;
+    quotes: "\\201C""\\201D""\\2018""\\2019" ;
+    color: #e0e0e0; /* Text color */
+    font-style: italic; /* Add italic style */
+    border-radius: 0 5px 5px 0; /* Rounded border on the right side */
+}
+
+/* Style the horizontal rule */
+hr {
+    border-top: 1px solid #f0d9b5; /* Parchment color border */
+    margin: 2em 0;
+}
+
+/* Download Button */
+.stDownloadButton > button {
+     font-family: 'Cinzel Decorative', cursive !important;
+     background-color: #5a3e8a !important; /* A distinct color for download */
+     color: #e0e0e0 !important; /* Light text */
+     border: none !important;
+     border-radius: 5px !important;
+     padding: 10px 20px !important;
+     margin-top: 10px !important;
+     cursor: pointer !important;
+     transition: background-color 0.3s ease !important;
+     text-transform: uppercase !important;
+     font-weight: bold !important;
+     box-shadow: 3px 3px 5px rgba(0,0,0,0.5); /* Add shadow */
+}
+.stDownloadButton > button:hover {
+    background-color: #6b4f9b !important; /* Lighter shade on hover */
+}
