@@ -4,6 +4,7 @@ import streamlit as st
 from utils import client, call_agent, format_markdown_output, sanitize_filename
 from agents import create_agente_buscador, create_agente_planejador, create_agente_redator
 
+st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered") # centered or wide
 
 # --- CSS Styling ---
 # Função para carregar o CSS
@@ -20,7 +21,6 @@ def load_css(file_name="style.css"):
 css_completo = load_css()
 # --- Streamlit App Layout ---
 
-st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered") # centered or wide
 
 st.markdown(f"<style>{css_completo}</style>", unsafe_allow_html=True)
 
