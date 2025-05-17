@@ -65,7 +65,7 @@ if GOOGLE_API_KEY:
     ##########################################
     # --- Agent 1: Assistente de cozinha --- #
     ##########################################
-    def agente_buscador(topico, data_de_hoje):
+    def agente_buscador(topico):
         if not client: return "GenAI client not initialized." # Basic check
         buscador = Agent(
             name="agente_buscador",
@@ -84,7 +84,7 @@ if GOOGLE_API_KEY:
             Não inclua na lista receitas que sugerem ingredientes adicionais.
             """
         )
-        entrada_do_agente_buscador = f"Tópico: {topico} \nData de hoje: {data_de_hoje}"
+        entrada_do_agente_buscador = f"Tópico: {topico} \n"
         st.info("Chamando Agente 1 (Assistente)...") # Indicate progress
         result = call_agent(buscador, entrada_do_agente_buscador)
         return result
@@ -170,7 +170,7 @@ if GOOGLE_API_KEY:
                     
                     # --- Call Agent 1 ---
                     status.update(label="Passo 1: Buscando receitas compatíveis...", state="running")
-                    lancamentos_buscados = agente_buscador(topico, data_de_hoje)
+                    lancamentos_buscados = agente_buscador(topico)
                     status.update(label="Passo 1 concluído.", state="complete")
 
                     # --- Display Result 1 ---
