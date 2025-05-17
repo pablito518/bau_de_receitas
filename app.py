@@ -153,16 +153,16 @@ if GOOGLE_API_KEY:
     """)
 
     # --- User Input ---
-    topico = st.text_input("❓ Por favor, digite os INGREDIENTES sobre o qual você quer criar a receita (ex: frango cozido desfiado, arroz, ervilha):")
+    ingredients = st.text_input("❓ Por favor, digite os INGREDIENTES sobre o qual você quer criar a receita (ex: frango cozido desfiado, arroz, ervilha):")
 
     # --- Button to trigger the process ---
     if st.button("✨ Gerar Receita"):
-        if not topico:
+        if not ingredients:
             st.warning("Você esqueceu de digitar os ingredientes!")
         elif not client:
              st.error("Não foi possível iniciar o sistema de agentes. Verifique a configuração da API Key.")
         else:
-            st.write(f"Maravilha! Vamos então buscar receitas com {topico}")
+            st.write(f"Maravilha! Vamos então buscar receitas com {ingredients}")
 
             # Use st.status to show progress for the entire agent chain
             with st.status("Criando sua receita...", expanded=True) as status:
@@ -170,32 +170,32 @@ if GOOGLE_API_KEY:
                     
                     # --- Call Agent 1 ---
                     status.update(label="Passo 1: Buscando receitas compatíveis...", state="running")
-                    lancamentos_buscados = agente_buscador(topico)
+                    searched_recipes = agente_buscador(ingredients)
                     status.update(label="Passo 1 concluído.", state="complete")
 
                     # --- Display Result 1 ---
                     st.subheader("📝 Resultado do Agente 1 (Assistente)")
-                    st.markdown(format_markdown_output(lancamentos_buscados))
+                    st.markdown(format_markdown_output(searched_recipes))
                     st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 2 ---
                     status.update(label="Passo 2: Planejando a receita principal...", state="running")
-                    plano_de_post = agente_planejador(topico, lancamentos_buscados)
+                    recipe_plan = agente_planejador(ingredients, searched_recipes)
                     status.update(label="Passo 2 concluído.", state="complete")
 
                     # --- Display Result 2 ---
                     st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
-                    st.markdown(format_markdown_output(plano_de_post))
+                    st.markdown(format_markdown_output(recipe_plan))
                     st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 3 ---
                     status.update(label="Passo 3: Escrevendo o tutorial da receita...", state="running")
-                    rascunho_de_post = agente_redator(topico, plano_de_post)
+                    recipe_post = agente_redator(ingredients, recipe_plan)
                     status.update(label="Passo 3 concluído.", state="complete")
 
                     # --- Display Result 3 ---
                     st.subheader("📝 Resultado do Agente 3 (Chef)")
-                    st.markdown(format_markdown_output(rascunho_de_post))
+                    st.markdown(format_markdown_output(recipe_post))
                     st.markdown("---") # Horizontal rule
 
                     status.update(label="Receita gerada com sucesso!", state="complete")
