@@ -1,5 +1,13 @@
 import streamlit as st
 import os
+from google.adk.agents import Agent
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
+from google.adk.tools import google_search
+from google.genai import types
+from google import genai
+import textwrap
+import warnings
 # Use st.secrets for API key in Streamlit Cloud
 # If running locally, you might still use environment variables or a .env file
 # For Streamlit Cloud, the GOOGLE_API_KEY needs to be set in the app secrets
@@ -12,7 +20,6 @@ except KeyError:
     GOOGLE_API_KEY = None # Prevent further execution if key is missing
 
 
-from google import genai
 # Ensure API key is set before initializing client
 if GOOGLE_API_KEY:
     try:
@@ -23,16 +30,7 @@ if GOOGLE_API_KEY:
 
     MODEL_ID = "gemini-2.0-flash" # Or your preferred model ID
 
-    from google.adk.agents import Agent
-    from google.adk.runners import Runner
-    from google.adk.sessions import InMemorySessionService
-    from google.adk.tools import google_search
-    from google.genai import types
-    from datetime import date
-    import textwrap
-    # Removed IPython.display imports as they are for notebooks
 
-    import warnings
     warnings.filterwarnings("ignore")
 
     # Function to call an agent
