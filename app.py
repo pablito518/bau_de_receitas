@@ -201,11 +201,19 @@ if GOOGLE_API_KEY:
                     status.update(label="Passo 3 concluído.", state="complete")
 
                     # --- Display Result 3 ---
-                    st.subheader("📝 Resultado do Agente 3 (Chef)")
+                    st.subheader(" Receita tirada do Baú de receitas! 🍽️")
                     st.markdown(format_markdown_output(recipe_post))
                     st.markdown("---") # Horizontal rule
 
                     status.update(label="Receita gerada com sucesso!", state="complete")
+
+                    # --- Download Button ---
+                    st.download_button(
+                        label="Download Receita (TXT)",
+                        data=recipe_post, # Provide the raw text content
+                        file_name=f"receita_{ingredients.replace(' ', '_')}.txt", # Create a filename based on ingredients
+                        mime="text/plain" # Specify the MIME type for a text file
+                    )
 
                 except Exception as e:
                     st.error(f"Ocorreu um erro durante a geração da receita: {e}")
