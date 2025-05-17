@@ -135,12 +135,19 @@ if GOOGLE_API_KEY:
             Sugira alternativas para os ingredientes, como, por exemplo, a troca de óleo por azeite ou manteiga, se aplicável.
             Você pode usar o (google_search) para detalhar brevemente a história da receita.
             O post deve ser informativo e com linguagem simples. A estrutura deve estar bem dividida e deve ser de fácil compreensão.
+            Retorne o post considerando a estrutura:
+            ## Título
+            ## Introdução
+            ## Ingredientes
+            ## Modo de Preparo
+            ## Dicas
+            ## Conclusão
             """,
             description="Agente redator de tutoriais para blog",
             tools=[google_search]
         )
         entrada_do_agente_redator = f"Tópico: {topico}\nPlano de post: {plano_de_post}"
-        st.info("Chamando Agente 3 (Chef)...") # Indicate progress
+        #st.info("Chamando Agente 3 (Chef)...") # Indicate progress
         result = call_agent(chef, entrada_do_agente_redator)
         return result
 
