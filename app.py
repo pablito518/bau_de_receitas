@@ -1,109 +1,121 @@
 import streamlit as st
-# import re # Not needed directly in app.py anymore
 # from datetime import date # Import if date is needed by agent prompts again
 # Import necessary components from utils and agents
 from utils import client, call_agent, format_markdown_output, sanitize_filename
 from agents import create_agente_buscador, create_agente_planejador, create_agente_redator
 
+
 # --- Streamlit App Layout ---
-# Use st.title for the main heading
-st.title("A FORJA DE FÓRMULAS ÉPICAS")
+st.set_page_config(page_title="Baú de Ingrediente - Forja de Receitas Épicas", layout="wide")
 
-# Use st.subheader or st.write for the input label
-st.subheader("INGREDIENTES EM SEU INVENTÁRIO ( SEPARE POR VÍRGULAS ) :")
+# Cabeçalho principal da aplicação
+st.title("⚔️ Baú de Ingrediente ⚔️")
 
-# Use st.text_input for the ingredients input box
-ingredients = st.text_input(
-    label="Ex : casca de abóbora , talo de brócolis , pão amanhecido , cenoura murcha ...",
-    label_visibility="collapsed" # Hide the default label, using the subheader above
-)
+st.write("""
+Bem-vindo ao Baú de Ingredientes! Entre na Forja de Fórmulas Épicas!
+Informe os ingredientes que você possui em seu inventário, e nossos Mestres Culinários Alquimistas conjurarão uma receita exclusiva para você.
+""")
+st.markdown("---")
 
-# Use st.button for the "FORJAR RECEITA !" button
-# Streamlit buttons have default styling
-if st.button("FORJAR RECEITA !"):
-    if not ingredients:
-        st.warning("Você esqueceu de digitar os ingredientes!")
-    elif client is None: # Check if client initialization failed in utils
-         # Error message is already displayed in utils.py on load if key is missing
-         pass # Do nothing here, error is shown on page load or config issue
-    else:
-        st.write(f"Maravilha! Vamos então buscar receitas com {ingredients}")
+# Container principal da Forja (semelhante ao .forja-container do HTML)
+with st.container():
+    st.header("🔥 A Forja de Fórmulas Épicas 🔥")
 
-        # Initialize variable to store the final output before the status block
-        recipe_post = ""
-        # Use st.status for progress indication
-        with st.status("Criando sua receita...", expanded=True) as status:
-            try:
-                # Create agent instances within the process using functions from agents.py
-                buscador_agent = create_agente_buscador()
-                planejador_agent = create_agente_planejador()
-                redator_agent = create_agente_redator()
+    # --- User Input ---
+    # Semelhante a <label for="ingredientes"> e <textarea id="ingredientes">
+    st.subheader("📜 Ingredientes em Seu Inventário:")
+    ingredients = st.text_area(
+        "Digite os ingredientes que você tem, separados por vírgula (ex: casca de abóbora, talo de brócolis, pão amanhecido, cenoura murcha...)",
+        height=100, # Altura similar à textarea
+        placeholder="Ex: casca de abóbora, talo de brócolis, pão amanhecido, cenoura murcha..."
+    )
 
-                # --- Call Agent 1 ---
-                status.update(label="Passo 1: Buscando receitas compatíveis...", state="running")
-                searched_recipes = call_agent(buscador_agent, f"Tópico: {ingredients} \n") # Add data_de_hoje if needed by agent
-                if "Error during agent run" in searched_recipes: raise Exception(searched_recipes)
-                status.update(label="Passo 1 concluído.", state="complete")
+    # --- Button to trigger the process ---
+    # Semelhante a <button class="rpg-button text-xl">FORJAR RECEITA!</button>
+    col1, col2, col3 = st.columns([1,2,1]) # Para centralizar o botão
+    with col2:
+        if st.button("✨ FORJAR RECEITA! ✨", use_container_width=True):
+            if not ingredients:
+                st.warning("Você esqueceu de listar os ingredientes do seu inventário!")
+            elif client is None:
+                st.error("Erro na conexão com os grandes mestres alquimistas (Google API Key). Verifique as configurações.")
+            else:
+                st.success(f"Excelente! Os alquimistas começarão a forjar uma receita com: **{ingredients}**")
 
+                recipe_post = ""
+                with st.status("🔮 Conjurando sua fórmula mágica...", expanded=True) as status:
+                    try:
+                        buscador_agent = create_agente_buscador()
+                        planejador_agent = create_agente_planejador()
+                        redator_agent = create_agente_redator()
 
-                # --- Call Agent 2 ---
-                status.update(label="Passo 2: Planejando a receita principal...", state="running")
-                recipe_plan = call_agent(planejador_agent, f"Tópico:{ingredients}\nLançamentos buscados: {searched_recipes}")
-                if "Error during agent run" in recipe_plan: raise Exception(recipe_plan)
-                status.update(label="Passo 2 concluído.", state="complete")
+                        status.update(label="Passo 1: Vasculhando tomos antigos por receitas compatíveis...", state="running")
+                        searched_recipes = call_agent(buscador_agent, f"Tópico: {ingredients} \n")
+                        if "Error during agent run" in searched_recipes: raise Exception(searched_recipes)
+                        #st.text(f"Resultado Busca:\n{searched_recipes}") # Debug
+                        status.update(label="Passo 1 Concluído: Pergaminhos encontrados!", state="complete")
 
+                        status.update(label="Passo 2: Decifrando e planejando a receita principal...", state="running")
+                        recipe_plan = call_agent(planejador_agent, f"Tópico:{ingredients}\nLançamentos buscados: {searched_recipes}")
+                        if "Error during agent run" in recipe_plan: raise Exception(recipe_plan)
+                        #st.text(f"Resultado Plano:\n{recipe_plan}") # Debug
+                        status.update(label="Passo 2 Concluído: Plano da receita traçado!", state="complete")
 
-                # --- Call Agent 3 ---
-                status.update(label="Passo 3: Escrevendo o tutorial da receita...", state="running")
-                recipe_post = call_agent(redator_agent, f"Tópico: {ingredients}\nPlano de post: {recipe_plan}") # Assign output
-                if "Error during agent run" in recipe_post: raise Exception(recipe_post)
-                status.update(label="Passo 3 concluído.", state="complete")
+                        status.update(label="Passo 3: Transcrevendo o encantamento... digo, o tutorial da receita...", state="running")
+                        recipe_post = call_agent(redator_agent, f"Tópico: {ingredients}\nPlano de post: {recipe_plan}")
+                        if "Error during agent run" in recipe_post: raise Exception(recipe_post)
+                        status.update(label="Passo 3 Concluído: A fórmula mágica está pronta!", state="complete")
 
+                        status.update(label="Receita gerada com sucesso!", state="complete", expanded=False)
 
-                status.update(label="Receita gerada com sucesso!", state="complete")
+                    except Exception as e:
+                        st.error(f"Um feitiço deu errado durante a conjuração da receita: {e}")
+                        status.update(label="Erro na conjuração da receita.", state="error")
 
-            except Exception as e:
-                st.error(f"Ocorreu um erro durante a geração da receita: {e}")
-                status.update(label="Erro na geração da receita.", state="error")
+                # --- Display Result ---
+                # Semelhante ao .output-header e .output-area
+                st.subheader("📖 Fórmula Mágica Revelada: 📖")
+                if recipe_post and "Error during agent run" not in recipe_post:
+                    # Em HTML, o <p id="receita-gerada" class="output-instruction-text"> é substituído.
+                    # Aqui, exibimos diretamente a receita.
+                    st.markdown(format_markdown_output(recipe_post))
+                    st.markdown("---")
 
-        # --- Display Result 3 ---
-        # Use st.subheader for the output label
-        st.subheader("FÓRMULA MÁGICA REVELADA :")
+                    # --- Download Button ---
+                    download_filename = f"{sanitize_filename(recipe_post)}.txt"
+                    st.download_button(
+                        label="📜 Baixar Pergaminho da Receita",
+                        data=recipe_post,
+                        file_name=download_filename,
+                        mime="text/plain"
+                    )
+                elif "Error during agent run" in recipe_post:
+                     st.warning("Os alquimistas encontraram um problema e não foi possível gerar a receita. Tente ingredientes diferentes.")
+                # Se recipe_post estiver vazio (e não for um erro), significa que o processo não chegou a gerar.
+                # A mensagem de "erro na conjuração" já teria sido mostrada no bloco except.
 
-        # Use st.text_area for the recipe output box
-        # The content will be the formatted markdown output
-        # We set a fixed height to mimic the appearance of a box
-        if recipe_post and "Error during agent run" not in recipe_post:
-             st.text_area(
-                 label="SUA RECEITA ÉPICA APARECERÁ AQUI APÓS A FORJA ! PREPARE SEUS UTENSÍLIOS E ACENDA O FOGO !",
-                 value=format_markdown_output(recipe_post), # Display the formatted recipe
-                 height=300, # Set a fixed height for the output box
-                 label_visibility="collapsed" # Hide the default label
-             )
-             st.markdown("---") # Standard horizontal rule
+        # Se o botão não foi clicado, ou se os ingredientes não foram fornecidos inicialmente,
+        # mostrar a instrução inicial da área de output.
+        # Isso é um pouco diferente do HTML onde o JS controla a visibilidade.
+        # No Streamlit, o estado é reconstruído a cada interação.
+        # Para uma correspondência mais próxima, precisaríamos usar st.session_state para
+        # controlar a visibilidade deste bloco de forma mais persistente.
+        # No entanto, para manter a simplicidade e usar "exclusivamente componentes Streamlit"
+        # da forma mais direta, esta abordagem é razoável.
+        # Se quisermos exibir a mensagem "Sua receita aparecerá aqui" ANTES do primeiro clique,
+        # podemos adicionar um else ao if st.button, mas isso complicaria o estado de quando
+        # a receita é gerada ou falha.
+        # Uma forma mais simples é exibir a receita (ou erro) quando ela existir,
+        # e nada específico se ainda não foi gerada (o subheader "Fórmula Mágica Revelada" já indica a área).
 
-             # --- Download Button ---
-             # Uses Streamlit's default download button styling
-             download_filename = f"{sanitize_filename(recipe_post)}.txt"
-
-             st.download_button(
-                 label="Baixar Receita",
-                 data=recipe_post,
-                 file_name=download_filename,
-                 mime="text/plain"
-             )
-
-        else:
-            # Display the placeholder text in a text area if no recipe is generated
-             st.text_area(
-                 label="SUA RECEITA ÉPICA APARECERÁ AQUI APÓS A FORJA ! PREPARE SEUS UTENSÍLIOS E ACENDA O FOGO !",
-                 value="SUA RECEITA ÉPICA APARECERÁ AQUI APÓS A FORJA ! PREPARE SEUS UTENSÍLIOS E ACENDA O FOGO !",
-                 height=300,
-                 label_visibility="collapsed"
-             )
-             st.markdown("---") # Standard horizontal rule
-
-
-#else: # This block executes if the client could not be initialized in utils.py
-  #   st.warning("Por favor, configure sua Google API Key nas Secrets do Streamlit Cloud para usar esta aplicação.")
-
+# Adicionando um "rodapé" simples para tentar replicar a estrutura do HTML
+st.markdown("---")
+st.markdown("""
+<div style="text-align: center; color: grey; font-size: 0.9em;">
+    <p>&copy; 2025 Baú de Ingrediente. Todos os direitos reservados. Forjado com Magia e Aproveitamento.</p>
+    <p>
+        <a href="#" style="color: grey; text-decoration: none;">Política de Privacidade</a> |
+        <a href="#" style="color: grey; text-decoration: none;">Termos de Uso</a>
+    </p>
+</div>
+""", unsafe_allow_html=True)
