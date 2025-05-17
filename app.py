@@ -282,11 +282,13 @@ div[data-testid="stDownloadButton"] > button:hover {
 }
 
 """
+# --- Streamlit App Layout ---
+
+st.set_page_config(page_title="Baú de Ingrediente - Forja de Receitas Épicas", layout="centered") # centered or wide
+
 st.markdown(f"<style>{css_completo}</style>", unsafe_allow_html=True)
 
 
-# --- Streamlit App Layout ---
-st.set_page_config(page_title="Baú de Ingrediente - Forja de Receitas Épicas", layout="centered") # centered or wide
 
 # Cabeçalho principal da aplicação
 st.title("⚔️ Baú de Ingrediente ⚔️")
