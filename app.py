@@ -140,6 +140,7 @@ if GOOGLE_API_KEY:
             ## Modo de Preparo
             ## Dicas
             ## Conclusão
+            Não inclua em sua resposta textos que não sejam parte do post.
             """,
             description="Agente redator de tutoriais para blog",
             tools=[google_search]
