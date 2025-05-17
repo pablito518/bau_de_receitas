@@ -174,9 +174,9 @@ if GOOGLE_API_KEY:
                     status.update(label="Passo 1 concluído.", state="complete")
 
                     # --- Display Result 1 ---
-                  #  st.subheader("📝 Resultado do Agente 1 (Assistente)")
-                  #  st.markdown(format_markdown_output(lancamentos_buscados))
-                  #  st.markdown("---") # Horizontal rule
+                    st.subheader("📝 Resultado do Agente 1 (Assistente)")
+                    st.markdown(format_markdown_output(lancamentos_buscados))
+                    st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 2 ---
                     status.update(label="Passo 2: Planejando a receita principal...", state="running")
@@ -184,9 +184,9 @@ if GOOGLE_API_KEY:
                     status.update(label="Passo 2 concluído.", state="complete")
 
                     # --- Display Result 2 ---
-                   # st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
-                   # st.markdown(format_markdown_output(plano_de_post))
-                   # st.markdown("---") # Horizontal rule
+                    st.subheader("📝 Resultado do Agente 2 (Cozinheiro)")
+                    st.markdown(format_markdown_output(plano_de_post))
+                    st.markdown("---") # Horizontal rule
 
                     # --- Call Agent 3 ---
                     status.update(label="Passo 3: Escrevendo o tutorial da receita...", state="running")
