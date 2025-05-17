@@ -98,5 +98,5 @@ if st.button("✨ Gerar Receita"):
             )
 
 
-else: # This block executes if the client could not be initialized in utils.py
-     st.warning("Por favor, configure sua Google API Key nas Secrets do Streamlit Cloud para usar esta aplicação.")
+#else: # This block executes if the client could not be initialized in utils.py
+#     st.warning("Por favor, configure sua Google API Key nas Secrets do Streamlit Cloud para usar esta aplicação.")
