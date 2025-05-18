@@ -1,10 +1,10 @@
-<div align="center">
+<div aling="center">
   <a href="https://baudereceitas.streamlit.app/">
-    <img src="assets/bau_de_receitas.png" alt="Baú de receitas Logo" width="150px"/>
+    <img src="assets/logo.png" alt="Baú de receitas Logo" width="150px"/>
   </a>
 </div>
 <br>
-<p align="center">
+<p aling="center">
   <a href="https://baudereceitas.streamlit.app" target="_blank" rel="noopener noreferrer"></a>
 </p>
 
