@@ -2,7 +2,7 @@ import streamlit as st
 # from datetime import date # Import if date is needed by agent prompts again
 # Import necessary components from utils and agents
 from utils import client, call_agent, format_markdown_output, sanitize_filename
-from agents import create_agente_buscador, create_agente_planejador, create_agente_redator
+from agents import create_agente_assistente, create_agente_cozinheiro, create_agente_chef
 
 st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered") # centered or wide
 
@@ -76,9 +76,9 @@ if st.button("✨ FORJAR RECEITA! ✨"): # O CSS cuidará da centralização e e
         recipe_post_content = ""
         with st.status("🔮 Conjurando sua fórmula mágica...", expanded=True) as status_ui:
             try:
-                buscador_agent = create_agente_buscador()
-                planejador_agent = create_agente_planejador()
-                redator_agent = create_agente_redator()
+                buscador_agent = create_agente_assistente()
+                planejador_agent = create_agente_cozinheiro()
+                redator_agent = create_agente_chef()
 
                 status_ui.update(label="Passo 1: Vasculhando tomos antigos por receitas compatíveis...", state="running")
                 searched_recipes = call_agent(buscador_agent, f"Tópico: {ingredients} \n")
@@ -137,10 +137,6 @@ else: # Foi clicado, mas houve erro de input ou a receita está vazia por algum 
 st.markdown("---")
 st.markdown("""
 <div class="footer-custom" style="text-align: center;">
-    <p>&copy; 2025 Baú de Ingrediente. Todos os direitos reservados. Forjado com Magia e Aproveitamento.</p>
-    <p>
-        <a href="#">Política de Privacidade</a> |
-        <a href="#">Termos de Uso</a>
-    </p>
+    <p>&copy; 2025 Baú de Receitas. Todos os direitos reservados. Forjado com Magia e Aproveitamento.</p>
 </div>
 """, unsafe_allow_html=True)
