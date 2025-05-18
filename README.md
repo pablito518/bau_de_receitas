@@ -18,7 +18,7 @@ Mas não tema! Das terras distantes da programação 💻 e alquimia digital ✨
 
 Este não é um baú qualquer, é um portal mágico 🔮 que conjura pratos incríveis usando *exatamente* o que você tem em mãos 🙌. Reduza o desperdício, economize suas moedas 💰 e impressione até o mais exigente dos Bardos 🎶 com suas novas habilidades na cozinha 💪. Prepare seus utensílios 🔪🥘, acenda o fogo do dragão 🔥🐉 e que a forja comece! ⚔️
 
-![Preview](assets/preview.png)
+![Preview](assets/logo.png)
 
 ## ✨ Recursos
 
@@ -51,7 +51,7 @@ Esta aventura digital 💻 não começou em uma taverna empoeirada, mas sim em u
 
 Na interface da aplicação, digite os ingredientes que você tem no campo de texto, separados por vírgula. Clique no botão "✨ FORJAR RECEITA! ✨" e aguarde enquanto os magos alquimistas conjuram sua fórmula mágica. A receita aparecerá na seção "Fórmula Mágica Revelada".
 
-![Forja](assets/forja.pgn)
+![Forja](assets/forja.png)
 
 ## 💻 Tecnologias
 
