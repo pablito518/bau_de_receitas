@@ -1,6 +1,6 @@
 <div aling="center">
   <a href="https://baudereceitas.streamlit.app/">
-    <img src="assets/logo.png" alt="Baú de receitas Logo" width="150px"/>
+    <img src="assets/logo.png" alt="Baú de receitas Logo" width="350px"/>
   </a>
 </div>
 <br>
@@ -17,8 +17,6 @@ Cansado de encontrar aqueles "artefatos esquecidos" 🥔🧅🥕 no fundo da sua
 Mas não tema! Das terras distantes da programação 💻 e alquimia digital ✨, surge o **Baú de Receitas - Sua Forja Pessoal de Fórmulas Épicas!** 🔥📜 Deixe de lado o desespero de olhar para um inventário limitado 🎒 e prepare-se para uma jornada saborosa 🗺️. Com a ajuda de nossos lendários **Mestres Culinários Alquimistas** 🧙‍♂️🍲, transformaremos aqueles itens que pareciam destinados à compostagem 🌱 em verdadeiras obras de arte gastronômicas 🍽️!
 
 Este não é um baú qualquer, é um portal mágico 🔮 que conjura pratos incríveis usando *exatamente* o que você tem em mãos 🙌. Reduza o desperdício, economize suas moedas 💰 e impressione até o mais exigente dos Bardos 🎶 com suas novas habilidades na cozinha 💪. Prepare seus utensílios 🔪🥘, acenda o fogo do dragão 🔥🐉 e que a forja comece! ⚔️
-
-![Preview](assets/logo.png)
 
 ## ✨ Recursos
 
