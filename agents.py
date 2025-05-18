@@ -3,11 +3,11 @@ from google.adk.agents import Agent
 from utils import call_agent, google_search, MODEL_ID
 
 # --- Agent 1: Assistente de cozinha ---
-def create_agente_buscador():
+def create_agente_assistente():
     return Agent(
         name="agente_buscador",
         model=MODEL_ID, # Use the imported MODEL_ID
-        description="Agente que busca informações no Google",
+        description="Agente assistente que busca informações no Google",
         tools=[google_search], # Use the imported tool
         instruction="""
         Você é um cozinheiro assistente de pesquisa. A sua tarefa é usar a ferramenta de busca do google (google_search)
@@ -23,7 +23,7 @@ def create_agente_buscador():
     )
 
 # --- Agent 2: Cozinheiro ---
-def create_agente_planejador():
+def create_agente_cozinheiro():
     return Agent(
         name="agente_planejador",
         model=MODEL_ID, # Use the imported MODEL_ID
@@ -40,12 +40,12 @@ def create_agente_planejador():
         Caso as receitas estejam simples/simplificadas, não adicione mais ingredientes,
         mesmo que a receita original possua tais ingredientes.
         """,
-        description="Agente que planeja receitas",
+        description="Agente cozinheiro que planeja receitas",
         tools=[google_search] # Use the imported tool
     )
 
 # --- Agent 3: Chef ---
-def create_agente_redator():
+def create_agente_chef():
     return Agent(
         name="agente_redator",
         model=MODEL_ID, # Use the imported MODEL_ID
@@ -66,6 +66,6 @@ def create_agente_redator():
         ## Conclusão
         Forneça apenas o post, sem qualquer outro texto introdutório ou explicativo.
         """,
-        description="Agente redator de tutoriais para blog",
+        description="Agente Chef redator de tutoriais para blog",
         tools=[google_search] # Use the imported tool
     )
