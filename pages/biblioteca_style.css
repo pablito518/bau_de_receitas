@@ -87,6 +87,10 @@ div[data-testid="stExpander"] {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+div[data-testid="stExpander"] p {
+    font-size: 1.2rem;
+}
+
 div[data-testid="stExpander"]:hover {
     transform: translateY(-10px);
     box-shadow: 0 12px 20px rgba(0,0,0,0.8), 0 0 50px rgba(255,215,0,1);
@@ -187,4 +191,43 @@ div[data-testid="stAppViewContainer"] > section:last-of-type {
     background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iIzEyMGEyYiIvPgogICAgPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iNCIgZmlsbD0iIzNhMnA1YiIgb3BhY2l0eT0iMC42Ii8+CiAgICA8cGF0aCBkPSJNIDAgMCBMIDEwIDEwIEwgMCAyMCBaIiBmaWxsPSIjM2EycDViIiBvcGFjaXR5PSIwLjMiLz4KICAgIDxwYXRoIGQ9Ik0gNDAgMCBMIDMwIDEwIEwgNDAgMjAgWiIgZmlsbD0iIzNhMnA1YiIgb3BhY2l0eT0iMC4zIi8+CiAgICA8cGF0aCBkPSJNIDAgNDAgTCAxMCAzMCBMIDAgMjAgWiIgZmlsbD0iIzNhMnA1YiIgb3BhY2l0eT0iMC4zIi8+CiAgICA8cGF0aCBkPSJNIDQwIDQwIEwgMzAgMzAgTCA0MCAyMCBaIiBmaWxsPSIjM2EycDViIiBvcGFjaXR5PSIwLjMiLz4KPC9zdmc+');
     background-size: 40px 40px !important;
     color: #e0e0e0 !important;
+}
+
+div[data-testid="stButton"] > button {
+    font-family: 'Cinzel Decorative', cursive !important;
+    font-size: 1.2rem !important; /* Um pouco maior */
+    font-weight: 700 !important;
+    color: #8B4513 !important; /* SaddleBrown (marrom mais avermelhado) */
+    background: linear-gradient(to bottom, #f0e68c, #e9d98a) !important; /* Gradiente sutil de pergaminho */
+    border: none !important;
+    padding: 14px 32px !important;
+    margin: 15px auto !important; /* Centraliza se o container do botão permitir */
+    display: block !important; /* Para que margin auto funcione para centralizar */
+    border-radius: 5px !important;
+    transition: all 0.2s ease !important;
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.2), /* Sombra interna sutil */
+        0 4px 0 0 #8b4513, /* Sombra marrom inferior (simula borda) */
+        0 6px 8px rgba(0,0,0,0.4) !important; /* Sombra externa */
+    cursor: pointer !important;
+    width: auto !important; /* Para o botão não ocupar a largura toda por padrão */
+}
+div[data-testid="stButton"] > button:hover {
+    background: linear-gradient(to bottom, #e9d98a, #f0e68c) !important; /* Inverte o gradiente */
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.3),
+        0 6px 0 0 #8b4513, /* Sombra inferior mais proeminente */
+        0 8px 12px rgba(0,0,0,0.6) !important;
+    transform: translateY(-3px) !important;
+    color: #8B4513 !important; /* Manter a cor do texto no hover */
+    text-shadow: 1px 1px 0px #422d09 !important; /* Manter a sombra escura no hover */
+}
+div[data-testid="stButton"] > button:active {
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.4),
+        0 2px 0 0 #8b4513, /* Sombra menor */
+        0 3px 5px rgba(0,0,0,0.3) !important;
+    transform: translateY(1px) translateX(1px) !important; /* Efeito de pressionar */
+    color: #8B4513 !important; /* Manter a cor do texto no active */
+    text-shadow: 1px 1px 0px #422d09 !important; /* Manter a sombra escura no active */
 }
