@@ -6,7 +6,7 @@ from utils import client, MODEL_ID, SYSTEM_INSTRUCTION # SYSTEM_INSTRUCTION impo
 from PIL import Image
 import base64
 
-st.set_page_config(page_title="O Oráculo – Baú de Ingredientes", layout="centered", initial_sidebar_state="collapsed", page_icon="🔮")
+st.set_page_config(page_title="O Oráculo – Baú de Receitas", layout="centered", initial_sidebar_state="collapsed", page_icon="🔮")
 
 # --- CSS Styling ---
 def load_css(file_name="style.css"):
@@ -56,7 +56,7 @@ with st.sidebar:
     st.write("")
     
 
-    if st.button("A Bússola do Impacto", use_container_width=True, key="bussola_sidebar_button"):
+    if st.button("O oráculo 🔮", use_container_width=True, key="bussola_sidebar_button"):
         st.switch_page("pages/bussola.py")
         
     st.write("")
