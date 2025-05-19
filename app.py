@@ -6,7 +6,7 @@ from agents import create_agente_assistente, create_agente_cozinheiro, create_ag
 from PIL import Image
 import base64
 
-st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered", initial_sidebar_state="auto") # centered or wide
+st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered", initial_sidebar_state="expanded") # centered or wide
 
 # --- CSS Styling ---
 # Função para carregar o CSS
@@ -61,8 +61,8 @@ with st.sidebar:
     st.write("")
     
 
-    if st.button("A Bússola do Impacto", use_container_width=True, key="bussola_sidebar_button"):
-        st.switch_page("pages/bussola.py")
+    if st.button("O oráculo", use_container_width=True, key="bussola_sidebar_button"):
+        st.switch_page("pages/oraculo.py")
         
     st.write("")
 
