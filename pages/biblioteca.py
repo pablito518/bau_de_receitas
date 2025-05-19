@@ -17,7 +17,7 @@ def load_css(file_name="biblioteca_style.css"):
         st.error(f"Erro ao carregar CSS: {e}")
 
 # Configuração da página
-st.set_page_config(page_title="Biblioteca Arcana - Baú de Ingrediente", layout="centered", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Biblioteca Arcana - Baú de Receitas", layout="centered", initial_sidebar_state="auto", favicon="🔥")
 
 # Carrega o CSS (agora com o caminho corrigido)
 css_completo = load_css("biblioteca_style.css")
