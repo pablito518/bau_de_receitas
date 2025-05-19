@@ -1,6 +1,6 @@
 from google.adk.agents import Agent
 # Import necessary components from utils
-from utils import call_agent, google_search, MODEL_ID
+from utils import google_search, MODEL_ID
 
 # --- Agent 1: Assistente de cozinha ---
 def create_agente_assistente():
