@@ -51,6 +51,33 @@ Na interface da aplicação, digite os ingredientes que você tem no campo de te
 
 ![Forja](assets/forja.png)
 
+---
+
+# 📜 Biblioteca Arcana 📜
+
+## Sobre esta Câmara Sagrada
+
+Bem-vindo, ó buscador de conhecimento, à **Biblioteca Arcana**! Este não é um mero amontoado de papiros, mas um santuário digital onde os segredos mais profundos do aproveitamento e da conservação de alimentos são zelosamente guardados e generosamente compartilhados. Forjada como parte do grande projeto [Baú de Receitas](https://baudereceitas.streamlit.app/), esta biblioteca é um pilar de sabedoria para todos os aventureiros culinários que desejam honrar cada ingrediente e combater o nefasto espectro do desperdício.
+
+Nesta página, você encontrará uma coleção de **Tomos de Sabedoria**, cada um dedicado a um aspecto crucial da maestria sobre os alimentos. Desde rituais ancestrais de preservação até a alquimia moderna de transformar sobras em tesouros, nosso objetivo é equipá-lo com o conhecimento necessário para que seu inventário seja sempre farto e suas criações, lendárias.
+
+![Biblioteca](assets/biblioteca.png)
+
+---
+# 🔮 O Oráculo Sábio 🔮
+![Oraculo](assets/oraculo.png)
+
+Esqueça os enigmas indecifráveis! Aqui, o diálogo é a chave. Faça tuas perguntas sobre ingredientes específicos, o impacto ambiental do desperdício, os valores nutricionais de partes menos convencionais dos alimentos, ou qualquer outra dúvida que ronde teus pensamentos sobre a arte de não desperdiçar. O Oráculo, com sua paciência etérea e conhecimento profundo, está aqui para guiar-te.
+
+
+## 🗣️ Como Evocar o Oráculo
+
+Navegue até a página do Oráculo através do menu do Baú de Receitas. No campo de texto designado, inscreva tua pergunta ou o tema sobre o qual desejas iluminação. Pressione Enter ou o botão de envio, e aguarde enquanto o Oráculo consulta os éteres do conhecimento. Sua resposta se materializará na tela em instantes. Que tuas dúvidas se dissipem como névoa ao sol da manhã!
+
+![OraculoEx](assets/oraculoex.png)
+
+---
+
 ## 💻 Tecnologias
 
 Com um aceno de varinha (ou alguns cliques e digitações!), esta portentosa plataforma foi conjurada utilizando [**Streamlit**](https://github.com/streamlit/streamlit) ✨, uma ferramenta arcana 🛠️ em Python que torna a construção de aplicações web interativas tão rápida quanto lançar um feitiço de teletransporte ⚡. E para infundir a plataforma com vida e inteligência, recorremos à fonte inesgotável de poder arcano 🔮: a gloriosa [**API do Google Gemini**](https://ai.google.dev/gemini-api/docs?hl=pt-br), trazendo a própria essência da inteligência artificial generativa 🧠✨ para o nosso Baú Mágico!
