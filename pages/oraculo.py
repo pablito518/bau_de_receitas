@@ -57,7 +57,7 @@ with st.sidebar:
     
 
     if st.button("O oráculo 🔮", use_container_width=True, key="bussola_sidebar_button"):
-        st.switch_page("pages/bussola.py")
+        st.switch_page("pages/oraculo.py")
         
     st.write("")
 
