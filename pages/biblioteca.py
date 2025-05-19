@@ -20,7 +20,7 @@ def load_css(file_name="biblioteca_style.css"):
 st.set_page_config(page_title="Biblioteca Arcana - Baú de Ingrediente", layout="centered", initial_sidebar_state="collapsed")
 
 # Carrega o CSS (agora com o caminho corrigido)
-load_css("biblioteca_style.css")
+css_completo = load_css("biblioteca_style.css")
 
 # --- Cabeçalho (sem navegação interna) ---
 # A logo e o título principal da página
@@ -64,6 +64,41 @@ except FileNotFoundError:
         </div>
     </div>
     """, unsafe_allow_html=True)
+    
+hide_streamlit_style = """
+            <style>
+                /* Hide the Streamlit header and menu */
+                header {visibility: hidden;}
+                /* Optionally, hide the footer */
+                .streamlit-footer {display: none;}
+                /* Hide your specific div class, replace class name with the one you identified */
+                .st-emotion-cache-79elbk {display: none;}
+            </style>
+            """
+
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+# Inicia um bloco de código que será exibido na barra lateral
+with st.sidebar:
+    st.markdown("## ") # Título na sidebar") 
+    st.text("")
+
+    if st.button("Forja de Receitas Épicas", use_container_width=True, key="forja_sidebar_button"):
+        st.switch_page("app.py")
+        
+    st.write("")
+
+    if st.button("Biblioteca Arcana", use_container_width=True, key="biblioteca_sidebar_button"):
+        st.switch_page("pages/biblioteca.py")
+        
+    st.write("")
+    
+
+    if st.button("O oráculo", use_container_width=True, key="bussola_sidebar_button"):
+        st.switch_page("pages/oraculo.py")
+    st.write("")
+
+st.markdown(f"<style>{css_completo}</style>", unsafe_allow_html=True)
 
 
 # --- Seção Principal da Biblioteca ---
@@ -188,22 +223,3 @@ st.markdown("""
 <div class="footer-custom-st">
     <p>&copy; 2025 Baú de Ingrediente. Todos os direitos reservados. Forjado com Consciência e Aproveitamento.</p>
 """, unsafe_allow_html=True)
-
-# --- Chatbot Widget ---
-try:
-    project_root = Path(__file__).parent.parent
-    chapeu_path = project_root / "assets" / "chapeu.png"
-    with open(chapeu_path, "rb") as img_file:
-        chapeu_base64 = base64.b64encode(img_file.read()).decode()
-    chatbot_widget_html = f"""
-    <div class="chatbot-widget-st" title="Converse com o Sábio do Aproveitamento!">
-        <img src="data:image/png;base64,{chapeu_base64}" style="border-radius: 50%; object-fit: cover; width: 100%; height: 100%; max-width: 60px; max-height: 60px; display: block;" />
-    </div>
-    """
-    st.markdown(chatbot_widget_html, unsafe_allow_html=True)
-except FileNotFoundError:
-    st.markdown("""
-    <div class="chatbot-widget-st" title="Converse com o Sábio do Aproveitamento!">
-         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white" viewBox="0 0 256 256"><path d="M208,80H172.32l-28.9-65.0 EligibleForAsPath eligibleForAsPath-group-id="0" eligibleForAsPath eligibleForAsPath-decoration-id="0" eligibleForAsPath eligibleForAsPath-eligibleForAsPath-id="0" d="m136,20.75a12,12,0,0,0-16,0L91.68,80H48a20,20,0,0,0-20,20V192a20,20,0,0,0,20,20H208a20,20,0,0,0,20-20V100A20,20,0,0,0,208,80Zm4,112H44V100A4,4,0,0,1,48,96H99.08a12,12,0,0,0,11.25-7.38L128,48.06l17.67,40.56A12,12,0,0,0,156.92,96H208a4,4,0,0,1,4,4Z"></path></svg>
-    </div>
-    """, unsafe_allow_html=True) # Placeholder SVG
