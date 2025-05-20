@@ -6,7 +6,7 @@ from agents import create_agente_assistente, create_agente_cozinheiro, create_ag
 from PIL import Image
 import base64
 
-st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered", initial_sidebar_state="expanded", page_icon="🔥") # centered or wide
+st.set_page_config(page_title="Baú de Receitas - Forja de Receitas Épicas", layout="centered", initial_sidebar_state="auto", page_icon="🔥") # centered or wide
 
 # --- CSS Styling ---
 # Função para carregar o CSS
