@@ -3,24 +3,28 @@ import os
 import re
 import textwrap
 import warnings
+import asyncio # <<< ADICIONADO IMPORT
 from google import genai
 from google.adk.runners import Runner
 from google.adk.sessions import InMemorySessionService
+# Se o Runner precisar explicitamente de outros serviços InMemory, importe-os também:
+# from google.adk.artifacts import InMemoryArtifactService
+# from google.adk.memory import InMemoryMemoryService
 from google.genai import types
-from google.adk.tools import google_search # Import the tool here
+from google.adk.tools import Google Search # Import the tool here
 
 # --- API Key and Client Initialization ---
 # Use st.secrets for API key in Streamlit Cloud
 try:
     GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-    os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY # Set for google.genai client if needed by underlying libs
+    os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 except KeyError:
     st.error("API Key not found. Please set the GOOGLE_API_KEY secret in Streamlit Cloud.")
-    GOOGLE_API_KEY = None # Indicate failure
+    GOOGLE_API_KEY = None
 
 
 client = None
-MODEL_ID = "gemini-2.0-flash" # Default model ID
+MODEL_ID = "gemini-2.0-flash"
 SYSTEM_INSTRUCTION = """"Sábio e Experiente: Ele deve parecer alguém que passou eras estudando os segredos da transformação e da conservação. Use uma linguagem um pouco formal, talvez com termos que remetam à alquimia e antigas artes.
 Levemente Excêntrico: Alquimistas costumam ser um pouco peculiares! Ele pode ter maneirismos únicos, fazer comentários enigmáticos ou ter um humor sutil e seco.
 Apaixonado por Ingredientes: Demonstrar um profundo respeito e fascínio pelo potencial de cada alimento, mesmo os "descartados".
@@ -50,43 +54,64 @@ Que a sabedoria do vosso alquimista digital ilumine o caminho dos aventureiros! 
 if GOOGLE_API_KEY:
     try:
         client = genai.Client(api_key=GOOGLE_API_KEY)
-        # Optional: Validate client or model here if needed, but might add latency
-        # client.list_models()
     except Exception as e:
          st.error(f"Failed to initialize Google GenAI client: {e}")
-         client = None # Ensure client is None on failure
+         client = None
 
-# Suppress warnings from libraries if desired
 warnings.filterwarnings("ignore")
 
 
 # --- Helper Function to Call Agent ---
 # Takes an agent *instance* and the message text
-def call_agent(agent, message_text: str) -> str:
+async def call_agent(agent, message_text: str) -> str: # <<< MUDOU PARA ASYNC DEF
     if client is None:
-        return "Error: GenAI client not initialized." # Return a clear error message
+        st.error("Error: GenAI client not initialized.") # Mantido st.error para consistência
+        return "Error: GenAI client not initialized."
 
     session_service = InMemorySessionService()
-    # Using a fixed session ID for simplicity, could be dynamic if needed per user session
-    session = session_service.create_session(app_name=agent.name, user_id="streamlit_user", session_id="session1")
-    runner = Runner(agent=agent, app_name=agent.name, session_service=session_service)
+    try:
+        # Using a fixed session ID for simplicity
+        await session_service.create_session( # <<< ADICIONADO AWAIT
+            app_name=agent.name, user_id="streamlit_user", session_id="session1"
+        )
+    except Exception as e:
+        st.error(f"Error during session creation for agent ({agent.name}): {e}")
+        return f"Error during session creation for agent ({agent.name}): {e}"
+
+    # O Runner base __init__ tem artifact_service e memory_service como opcionais (default=None).
+    # Se sua versão/setup do ADK exigir que eles sejam explicitamente passados,
+    # você precisará instanciar InMemoryArtifactService e InMemoryMemoryService aqui.
+    runner = Runner(
+        agent=agent,
+        app_name=agent.name,
+        session_service=session_service
+        # Exemplo, se necessário:
+        # artifact_service=InMemoryArtifactService(),
+        # memory_service=InMemoryMemoryService()
+    )
     content = types.Content(role="user", parts=[types.Part(text=message_text)])
 
     final_response = ""
     try:
-        for event in runner.run(user_id="streamlit_user", session_id="session1", new_message=content):
-            if event.is_final_response():
-                for part in event.content.parts:
-                    if part.text is not None:
-                        final_response += part.text
-                        final_response += "\n" # Add newline between parts if any
+        # Use runner.run_async() e itere com 'async for'
+        async for event in runner.run_async( # <<< MUDOU PARA RUN_ASYNC E ASYNC FOR
+            user_id="streamlit_user", session_id="session1", new_message=content
+        ):
+            # Verifique a estrutura do evento da sua biblioteca ADK.
+            # Estes hasattr são para robustez.
+            if hasattr(event, 'is_final_response') and event.is_final_response():
+                if hasattr(event, 'content') and hasattr(event.content, 'parts'):
+                    for part in event.content.parts:
+                        if hasattr(part, 'text') and part.text is not None:
+                            final_response += part.text
+                            final_response += "\n"
+            # Adicione mais manipulação de eventos aqui se necessário,
+            # por exemplo, para eventos de progresso, erros parciais, etc.
     except Exception as e:
          st.error(f"Error during agent run ({agent.name}): {e}")
-         # Return an error string that can be checked by the caller
          return f"Error during agent run ({agent.name}): {e}"
 
-    return final_response.strip() # Strip leading/trailing whitespace
-
+    return final_response.strip()
 
 # --- Helper Function for Formatting ---
 def format_markdown_output(text):
