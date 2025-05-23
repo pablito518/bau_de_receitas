@@ -11,7 +11,7 @@ from google.adk.sessions import InMemorySessionService
 # from google.adk.artifacts import InMemoryArtifactService
 # from google.adk.memory import InMemoryMemoryService
 from google.genai import types
-from google.adk.tools import Google Search # Import the tool here
+from google.adk.tools import google_search # Import the tool here
 
 # --- API Key and Client Initialization ---
 # Use st.secrets for API key in Streamlit Cloud
